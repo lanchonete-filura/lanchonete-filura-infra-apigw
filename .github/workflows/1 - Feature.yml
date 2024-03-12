@@ -41,6 +41,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Set Branch Name
+        id: branch_name
+        run: echo "BRANCH_NAME=$(echo $GITHUB_REF | cut -d'/' -f3)" >> $GITHUB_ENV
+
       - name: Create Pull Request
         if: ${{ success() }}
         uses: peter-evans/create-pull-request@v3
@@ -48,5 +52,5 @@ jobs:
           title: PR criado automaticamente
           body: Caso seu build de feature for realizado com sucesso, você poderá seguir para o planejamento de sua infra na develop
           base: develop
-          branch: "feature/*"
+          branch: ${{ env.BRANCH_NAME }}
           token: ${{ secrets.GITHUB_TOKEN }}
