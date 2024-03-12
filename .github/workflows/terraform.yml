@@ -36,7 +36,7 @@ jobs:
         run: terraform validate
 
       - name: Terraform Plan
-        if: ${{ startsWith(github.ref, 'refs/heads/develop') }}
+        if: ${{ startsWith(github.ref, 'refs/heads/develop') || startsWith(github.ref, 'refs/heads/main') }}
         run: terraform plan
         env:
           TF_LOG: DEBUG
