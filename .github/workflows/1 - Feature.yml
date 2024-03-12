@@ -7,6 +7,11 @@ on:
 
 jobs:
   terraform:
+
+    permissions:
+      id-token: write # obrigatório para usar autenticação OIDC
+      contents: read # obrigatório para clonar o código do repositório
+
     runs-on: ubuntu-latest
     
     steps:
