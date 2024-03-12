@@ -1,9 +1,7 @@
-name: 2 - Plan Develop (Terraform)
+name: Terraform
 
 on:
-  pull_request:
-    branches:
-      - develop
+  push:
 
 permissions:
   id-token: write # obrigatório para usar autenticação OIDC
@@ -11,6 +9,7 @@ permissions:
 
 jobs:
   terraform:
+
     runs-on: ubuntu-latest
     
     steps:
@@ -29,5 +28,21 @@ jobs:
           role-duration-seconds: ${{ secrets.AWS_ROLE_DURATION_SECONDS }}
           aws-region: ${{ secrets.AWS_REGION }}
       
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate
+
       - name: Terraform Plan
-        run: terraform plan -out=tfplan
+        if: ${{ startsWith(github.ref, 'refs/heads/develop') }}
+        run: terraform plan
+        env:
+          TF_LOG: DEBUG
+
+      - name: Terraform Apply
+        if: ${{ startsWith(github.ref, 'refs/heads/main') }}
+        run: terraform apply -auto-approve
+        env:
+          TF_LOG: DEBUG
