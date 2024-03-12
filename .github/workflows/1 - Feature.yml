@@ -8,6 +8,7 @@ on:
 permissions:
   id-token: write # obrigatório para usar autenticação OIDC
   contents: write # obrigatório para clonar o código do repositório
+  pull-requests: write
 
 jobs:
   terraform:
