@@ -7,7 +7,7 @@ on:
 
 permissions:
   id-token: write # obrigatório para usar autenticação OIDC
-  contents: read # obrigatório para clonar o código do repositório
+  contents: write # obrigatório para clonar o código do repositório
 
 jobs:
   terraform:
@@ -33,6 +33,7 @@ jobs:
         run: terraform init
 
   create-pull-request:
+    
     runs-on: ubuntu-latest
     needs: terraform
 
