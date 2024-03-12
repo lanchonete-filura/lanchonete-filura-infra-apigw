@@ -60,7 +60,7 @@ jobs:
         run: echo "BRANCH_NAME=$(echo $GITHUB_REF)" >> $GITHUB_ENV
 
       - name: Create Pull Request Develop
-        if: ${{ success() &&  startsWith(github.ref, 'refs/heads/feature/*')}}
+        if: ${{ success() &&  startsWith(github.ref, 'refs/heads/feature/')}}
         uses: peter-evans/create-pull-request@v6
         with:
           title: PR criado automaticamente
