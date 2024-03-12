@@ -43,7 +43,7 @@ jobs:
 
       - name: Set Branch Name
         id: branch_name
-        run: echo "BRANCH_NAME=$(echo $GITHUB_REF | cut -d'/' -f3)" >> $GITHUB_ENV
+        run: echo "BRANCH_NAME=$(echo $GITHUB_REF)" >> $GITHUB_ENV
 
       - name: Create Pull Request
         if: ${{ success() }}
