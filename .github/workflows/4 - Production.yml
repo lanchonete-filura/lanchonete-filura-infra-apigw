@@ -1,9 +1,9 @@
-name: 1 - Feature (Terraform)
+name: 4 - Production (Terraform)
 
 on:
   push:
     branches:
-      - feature/*
+      - main
 
 jobs:
   terraform:
@@ -25,14 +25,5 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
       
-      - name: Terraform Init
-        run: terraform init
-
-      - name: Create Pull Request
-        if: ${{ success() }}
-        uses: peter-evans/create-pull-request@v3
-        with:
-          title: PR criado automaticamente
-          body: Caso seu build de feature for realizado com sucesso, você poderá seguir para o planejamento de sua infra na develop
-          branch: develop
-          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Terraform Apply
+        run: terraform apply -auto-approve tfplan
