@@ -48,4 +48,6 @@ jobs:
           title: PR criado automaticamente
           body: Caso seu build de feature for realizado com sucesso, você poderá seguir para o planejamento de sua infra na develop
           branch: develop
+          base: develop
+          branch-suffix: "auto-pr"
           token: ${{ secrets.GITHUB_TOKEN }}
