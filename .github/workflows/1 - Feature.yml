@@ -1,4 +1,4 @@
-name: Terraform AWS - Feature
+name: 1 - Feature (Terraform)
 
 on:
   push:
